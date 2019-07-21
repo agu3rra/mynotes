@@ -1,0 +1,20 @@
+node('master'){
+    stage('Fetch Source Code'){
+        git '[address to git repo]'
+    }
+
+    dir('[some context dir]'){
+        stage('Running Unit Tests'){
+            sh 'python -m pytest -v'
+        }
+
+        stage('Running migrations'){
+            sh 'python manage.py makemigrations'
+            sh 'python manage.py migrate'
+        }
+
+        stage('Deploying'){
+            sh 'oc start-build myapp'
+        }
+    }
+}

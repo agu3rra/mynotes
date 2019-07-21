@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+<context>
+<name>DVWA</name>
+<desc/>
+<inscope>true</inscope>
+<incregexes>http://dvwa.macos:3000.*</incregexes>
+<excregexes>http://dvwa.macos:3000/instructions.php</excregexes>
+<excregexes>http://dvwa.macos:3000/setup.php</excregexes>
+<excregexes>http://dvwa.macos:3000/security.php</excregexes>
+<excregexes>http://dvwa.macos:3000/phpinfo.php</excregexes>
+<excregexes>http://dvwa.macos:3000/about.php</excregexes>
+<excregexes>http://dvwa.macos:3000/logout.php</excregexes>
+<tech>
+<include>Db</include>
+<include>Db.Firebird</include>
+<include>Db.HypersonicSQL</include>
+<include>Db.IBM DB2</include>
+<include>Db.Microsoft Access</include>
+<include>Db.Microsoft SQL Server</include>
+<include>Db.MySQL</include>
+<include>Db.Oracle</include>
+<include>Db.PostgreSQL</include>
+<include>Db.SAP MaxDB</include>
+<include>Db.SQLite</include>
+<include>Db.Sybase</include>
+<include>Language.PHP</include>
+<include>OS.Linux</include>
+<include>SCM</include>
+<include>SCM.Git</include>
+<include>SCM.SVN</include>
+<include>WS.Apache</include>
+<include>WS.Tomcat</include>
+<exclude>Language</exclude>
+<exclude>Language.ASP</exclude>
+<exclude>Language.C</exclude>
+<exclude>Language.XML</exclude>
+<exclude>OS</exclude>
+<exclude>OS.MacOS</exclude>
+<exclude>OS.Windows</exclude>
+<exclude>WS</exclude>
+<exclude>WS.IIS</exclude>
+</tech>
+<urlparser>
+<class>org.zaproxy.zap.model.StandardParameterParser</class>
+<config>{"kvps":"&amp;","kvs":"=","struct":[]}</config>
+</urlparser>
+<postparser>
+<class>org.zaproxy.zap.model.StandardParameterParser</class>
+<config>{"kvps":"&amp;","kvs":"=","struct":[]}</config>
+</postparser>
+<authentication>
+<type>2</type>
+<loggedin>\Q&lt;div class="body_padded"&gt;&lt;div class="message"&gt;You have logged in as 'admin'&lt;/div&gt;&lt;/div&gt;&#13;\E</loggedin>
+<form>
+<loginurl>http://dvwa.macos:3000/login.php</loginurl>
+<loginbody>username={%username%}&amp;password={%password%}</loginbody>
+</form>
+</authentication>
+<users>
+<user>0;true;YWRtaW4=;2;YWRtaW4=~cGFzc3dvcmQ=~</user>
+</users>
+<forceduser>0</forceduser>
+<session>
+<type>0</type>
+</session>
+<authorization>
+<type>0</type>
+<basic>
+<header/>
+<body/>
+<logic>AND</logic>
+<code>-1</code>
+</basic>
+</authorization>
+</context>
+</configuration>
