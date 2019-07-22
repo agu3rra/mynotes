@@ -50,6 +50,7 @@ Start date: Jul 20th 2019
 $ npm init -y
 $ npm install electron -D
 ```
+
 Then change `package.json`:
 ```javascript
 {
