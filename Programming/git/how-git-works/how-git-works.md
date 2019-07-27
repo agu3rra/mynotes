@@ -29,6 +29,10 @@ Porcelain Vs. Plumbing commands
         - [Merge trade-offs](#merge-trade-offs)
         - [Rebase trade-offs](#rebase-trade-offs)
     - [Tags in brief](#tags-in-brief)
+- [Distributed Version Control](#distributed-version-control)
+    - [Remotes](#remotes)
+    - [Synchronizing remotes](#synchronizing-remotes)
+    - [GitHub Features](#github-features)
 
 <!-- /TOC -->
 
@@ -150,3 +154,25 @@ In reality, it doesn't just dettaches, because it'd involve changing their SHA1.
 
 ## Tags in brief
 *A tag is like a branch that cannot move to point to another commit. It stays with the commit to which it was created to tag.*
+
+# Distributed Version Control
+Multiple repos  
+`git clone repo`
+
+* only the master gets clones.
+
+## Remotes
+* `git branch --all` to track all branches
+* `git show-ref master`
+
+## Synchronizing remotes
+* Keeping branches synced is tricky
+* `git fetch` obtains changes from remote, then do a `git merge` and `git push` the results
+* `git pull` == `git fetch` followed by `git merge`
+* Never rebase shared commits. Usually apply rebase only to commits you have not shared yet.
+
+## GitHub Features
+* Fork: like a remote clone.
+* Add an `upstream remote` to the original repo in order to track changes to the original project. Then keep pulling changes from the upstream repo to get conflicts with the project you're contributing solved.
+* To push to upstream, send a pull request (PR) to the owners of upstream.
+
