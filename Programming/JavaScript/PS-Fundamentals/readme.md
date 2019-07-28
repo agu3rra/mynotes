@@ -27,6 +27,13 @@ Start date: Jul 28th 2019
     - [bind](#bind)
     - [Arrow Function](#arrow-function)
     - [Default parameters](#default-parameters)
+- [Objects and Arrays](#objects-and-arrays)
+    - [Constructor function](#constructor-function)
+    - [Prototypes](#prototypes)
+        - [Expanding objects using prototypes](#expanding-objects-using-prototypes)
+    - [JSON](#json)
+    - [Array iteration](#array-iteration)
+- [Classes and Modules](#classes-and-modules)
 
 <!-- /TOC -->
 
@@ -237,3 +244,75 @@ let trackCard = function(carId, city='NY'){
     console.log(`Tracking ${carId} in ${city}.`);
 }
 ```
+
+# Objects and Arrays
+* Constructor Functions
+* Prototypes
+
+## Constructor function
+* Used to instantiate new objects
+* Primary way to create objects, before there were *classes* available in JavaScript.
+```javascript
+function Car(id) {
+    this.carId = id
+    this.start = function (){
+        console.log('vrumm...')
+    }
+}
+let car = new Car(123);
+car.start();
+```
+
+## Prototypes
+* in order to save functions from being re-created every time you instantiate an object for a contructor;
+* Saves memory;
+```javascript
+function Car(id){
+    this.carId = id;
+}
+Car.prototype.start = function(){
+    console.log(`Start: ${this.carId}`);
+}
+let car = new Car(123);
+car.start();
+```
+
+### Expanding objects using prototypes
+```javascript
+String.prototype.hello = function() {
+    return this.toString() + 'hello';
+}
+console.log('foo'.hello()); // foo hello
+```
+
+## JSON
+```javascript
+//Convert to JSON
+console.log(JSON.stringify(carIds))
+
+// Parsing
+let jsonIn = `
+    [
+        {"carId": 123},
+        {"carId": 456}
+    ]
+`
+let carIds = JSON.parse(jsonIn)
+```
+
+## Array iteration
+```javascript
+// iterating and filtering
+let carIds = [
+    {carId: 123, style: 'sedan'},
+    {carId: 456, style: 'convertible'},
+    {carId: 789, style: 'sedan'},
+]
+let convertibles = carIds.filter(
+    car => car.style === 'convertible'
+)
+console.log(convertibles)
+```
+* Similar to the above, you can use `find` (to return first element that matches condition) and `every` (tests every element in the array)
+
+# Classes and Modules 
