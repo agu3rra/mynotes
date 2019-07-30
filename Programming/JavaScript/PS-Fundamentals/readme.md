@@ -34,6 +34,15 @@ Start date: Jul 28th 2019
     - [JSON](#json)
     - [Array iteration](#array-iteration)
 - [Classes and Modules](#classes-and-modules)
+    - [Constructor and Properties](#constructor-and-properties)
+    - [Methods](#methods)
+    - [Inheritance](#inheritance)
+    - [Modules](#modules)
+- [Programming the BOM and the DOM](#programming-the-bom-and-the-dom)
+    - [The window Object](#the-window-object)
+    - [Timers](#timers)
+    - [Location](#location)
+    - [DOM](#dom)
 
 <!-- /TOC -->
 
@@ -316,3 +325,111 @@ console.log(convertibles)
 * Similar to the above, you can use `find` (to return first element that matches condition) and `every` (tests every element in the array)
 
 # Classes and Modules 
+* A new syntax to create constructors.
+* Modules allow code organization. File that can be shared across other files.
+```javascript
+class Car {
+
+}
+let car = new Car()
+console.log(car)
+```
+
+## Constructor and Properties
+* A constructor is a routine that gets executed when instantiating an object of a class (just like Java).
+```javascript
+class Car {
+    constructor(id){
+        this.id = id
+    }
+}
+let car = new Car(123)
+console.log(car)
+```
+
+## Methods
+* Functions that exist on an object
+* No need for the *function* keyword.
+```javascript
+class Car {
+    constructor(id){
+        this.id = id
+    }
+    identify(suffix) {
+        return `This car id ${id}`
+    }
+}
+let car = new Car(123)
+console.log(car.identify('!!!'))
+```
+
+## Inheritance
+```javascript
+class Vehicle {
+    constructor() {
+        this.type = 'car'
+    }
+    start() {
+        return `Starting: ${this.type}`
+    }
+}
+
+class Car extends Vehicle {
+    constructor() {
+        super(); // calls parent constructor
+    }
+    start() { //override
+        return 'car start' + super.start(); // and accessing parent's start().
+    }
+}
+let car = new.Car()
+console.log(car.type)
+```
+
+## Modules
+* Break up a class into individual files
+* In a `car.js` file:
+```javascript
+class Car {
+    constructor(id){
+        this.id = id
+    }
+    identify(suffix) {
+        return `This car id ${id}`
+    }
+}
+```
+* In an `index.js` file:
+```javascript
+import { Car } from './models/car.js'
+```
+
+# Programming the BOM and the DOM
+* Browser Object Model (BOM)
+* Document Object Model (DOM)
+* Window object
+* Timers
+* Location
+
+## The window Object
+* global object in JavaScript
+
+![window](add-on/window.png)
+
+* access the Mozzila developer network for details on the window object
+
+## Timers
+* Fire asynchronously
+```javascript
+let timeoutId = setTimeout( function() {
+    console.log('1 second passed')
+}, 1000)
+
+clearInterval(timeoutId) // stops the timer
+```
+
+## Location
+![location](add-ons/location.png)
+
+## DOM
+![dom](add-ons/dom.png)

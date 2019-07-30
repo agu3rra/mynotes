@@ -48,3 +48,9 @@ Start date: Jul 28th 2019
 ## The Index
 * Unique to Git.
 * Aka the *staging area*.
+* YOu can modify it directly.
+* clean status: working area and *the current commit* in the repository are in sync.
+* the index is like a launchpad.
+* when you get the *nothing to commit, working area clean* message, it's actually a statement that the index and the working area contain the same data.
+* `git diff`compares working area with index.
+* `git diff --cache`compares index with repository.
