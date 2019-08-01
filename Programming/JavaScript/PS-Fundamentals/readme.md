@@ -43,6 +43,16 @@ Start date: Jul 28th 2019
     - [Timers](#timers)
     - [Location](#location)
     - [DOM](#dom)
+- [Promises and Error Handling](#promises-and-error-handling)
+    - [Try Catch Finally](#try-catch-finally)
+    - [Custom Errors](#custom-errors)
+    - [Promises](#promises)
+        - [Setting a promise](#setting-a-promise)
+- [Data Using HTTP](#data-using-http)
+    - [XHR](#xhr)
+    - [jQuery](#jquery)
+- [Forms](#forms)
+- [Security and Production Builds](#security-and-production-builds)
 
 <!-- /TOC -->
 
@@ -433,3 +443,140 @@ clearInterval(timeoutId) // stops the timer
 
 ## DOM
 ![dom](add-ons/dom.png)
+
+# Promises and Error Handling
+* The idea is to catch errors so you can gracefully handle them.
+
+## Try Catch Finally
+```javascript
+try{
+    let car = newCar;
+}
+catch(error){
+    console.log('error: ', error)
+}
+console.log('continuing...')
+
+// a finally code always executes
+try{
+    let car = newCar;
+}
+catch(error){
+    console.log('error: ', error)
+}
+finally{
+    console.log('this always executes')
+}
+```
+
+## Custom Errors
+```javascript
+// a finally code always executes
+try{
+    throw new Error('My custom error.')
+}
+catch(error){
+    console.log('error: ', error)
+}
+finally{
+    console.log('this always executes')
+}
+```
+
+## Promises
+* A temporary holder for an async call object.
+* It's a value that you promisse will have an assignment once the async code finishes executing.
+* Since ES2016
+
+```javascript
+let promise = new Promise(
+    function(resolve, reject){
+        setTimeout(resolve, 100, 'someValue'); // resolve is a function that executesd after 100ms and gets passed 'someValue' as an argument.
+    }
+    // if there was an error, we'd call reject instead of the resolve function.
+)
+console.log(promise)
+```
+
+### Setting a promise
+* When you get access to a promise return value
+```javascript
+let promise = new Promise(
+    function(resolve, reject){
+        setTimeout(resolve, 100, 'someValue'); // resolve is a function that executesd after 100ms and gets passed 'someValue' as an argument.
+    }
+    // if there was an error, we'd call reject instead of the resolve function.
+)
+promise.then(
+    value => console.log('fullfilled: ' + value),
+    error => console.log('rejected: ' + error)
+)
+```
+
+# Data Using HTTP
+* HTTP requests using XHR
+* HTTP requests using jQuery
+
+## XHR
+* XML HTTP Request
+* Built-into browsers
+```javascript
+let xhttp = new XMLHttpRequest()
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+    }
+}
+xhttp.open('GET', 'https://myid.mockapi.io/api/v1/users', true)
+xhttp.send();
+```
+
+## jQuery
+* Simpler to use
+* Allows use of promises and error handling
+* before you use it: `npm install jquery`
+* `$` use is traditional for jQuery use. It's just a variable name.
+```javascript
+import $ from 'jquery';
+$.get('https://myid.mockapi.io/api/v1/users',
+    data => console.log('data: ' data)
+);
+
+//with promises
+let promise = $.get('https://myid.mockapi.io/api/v1/users')
+promise.then(
+    data => console.log('success: ', data),
+    error => console.log('error: ', error)
+);
+
+// POST requests
+let user = {
+    name: 'Andre Guerra',
+    avatar: 'ag.jpg'
+}
+
+let promise = $.post('https://myid.mockapi.io/api/v1/users', user)
+promise.then(
+    data => console.log('success: ', data),
+    error => console.log('error: ', error)
+);
+```
+
+# Forms
+* Preventing form submission (before sending) in order to validate with JavaScript before sending to the server.
+* I don't think that's a good idea. The backend should validate as well since requests can be intercepted or even sent directly to the server.
+```javascript
+let form = document.getElementById('user-form')
+form.addEventListener('submit', event => {
+    let user = form.elements['user']
+    let avatarFile = form.elements['avatar-file']
+    event.preventDefault();
+})
+```
+
+# Security and Production Builds
+* Don't store passwords or secret values in your JavaScript
+* All of it can be inspected
+* Code obfuscators can be easily used and also reversed.
+* `eval()` accepts a string as code. This can be extremelly dangerous.
+* Production code is usually minified. Check out the corresponding `npm` command for generating these `dist` files.
