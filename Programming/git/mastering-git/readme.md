@@ -20,6 +20,10 @@ Start date: Jul 28th 2019
     - [The Stash Area](#the-stash-area)
     - [Solving conflicts](#solving-conflicts)
     - [Paths](#paths)
+- [History Exploring the Past](#history-exploring-the-past)
+    - [Commits by other names](#commits-by-other-names)
+    - [History Forensics](#history-forensics)
+    - [Git log](#git-log)
 
 <!-- /TOC -->
 
@@ -123,3 +127,25 @@ A clipboard for your project
 
 ## Paths
 * `git checkout HEAD <somefile>`: copies somefile from the repo and overwrites it in the index and the working area.
+
+# History Exploring the Past
+* Using VIM is like being a text surgeon.
+
+## Commits by other names
+* The default `git log` is not very friendly, so `git log --graph --decorate --oneline`.
+* `git show HEAD^`: show me the parent commit of where HEAD is at now.
+* `git show HEAD^^`: show me the grandpa of the commit where HEAD is at now.
+* `git show HEAD~2`: same as above, going back 2 times. You can go back as many times as you like.
+* if you're looking at a merge (2 parents): `git show HEAD~2^2` selects the 2nd parent after going back 2 commits in time.
+
+## History Forensics
+* `git blame <filename>` allows tracking who changed what when.
+* `git diff HEAD HEAD~2` compare current commit with the one 2 commits ago.
+
+## Git log
+* `git help log`
+* `git log --patch`: see which changes were introduced (patch)
+* `git log --grep apples --oneline`: filter commits with the word "apples"
+* `git log -Gapples --patch`: see commits that either added or deleted the word "apples".
+* `git log HEAD~5..HEAD^`: list logs from 5 commits ago until the parent of HEAD.
+* `git log dev..master --oneline`: shows all the commits from dev to master. All the ones missing from master.
