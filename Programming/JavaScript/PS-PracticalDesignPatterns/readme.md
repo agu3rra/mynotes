@@ -22,6 +22,7 @@ Start date: Aug 4th 2019
     - [Constructor Pattern](#constructor-pattern)
     - [Module Pattern](#module-pattern)
     - [Factory Pattern](#factory-pattern)
+    - [Singleton Pattern](#singleton-pattern)
 
 <!-- /TOC -->
 
@@ -128,3 +129,31 @@ var Module = function(){
 * Creating different objects based on need
 * Repository creation
   
+## Singleton Pattern
+* All calls to the object return the exact same object. 
+* It kind of remembers every time it is called.
+
+```javascript
+var TaskRepo = (function(){
+    var taskRepo;
+    function createRepo() {
+        var taskRepo = new Object("Task");
+        return taskRepo;
+    }
+    return {
+        getInstance: function() {
+            if (!taskRepo) {
+                taskRepo = createRepo();
+            }
+            return taskRepo;
+        }
+    }
+})();
+
+var repo1 = TaskRepo.getInstance();
+var repo2 = TaskRepo.getInstance();
+
+if (repo1 === repo2){
+    console.log("Same TaskRepo.")
+}
+```
