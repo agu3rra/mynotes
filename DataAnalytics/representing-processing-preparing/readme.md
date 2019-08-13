@@ -12,6 +12,7 @@ Start date: Aug 11th 2019
     - [Outliers](#outliers)
         - [Distance from the mean](#distance-from-the-mean)
         - [Distance from fitted line](#distance-from-fitted-line)
+- [Preparing Data for Analysis](#preparing-data-for-analysis)
 
 <!-- /TOC -->
 
@@ -57,3 +58,19 @@ Outliers: points that lie more than *3 standard deviations (sqrt(variance))* fro
 
 ### Distance from fitted line
 ![outliers](addons/outliers.png)
+
+# Preparing Data for Analysis
+```python
+import pandas as pd
+import numpy as np
+
+toy_df = pd.DataFrame({'numbers': [1,2,3,np.nan,np.nan,7]})
+
+toy_df.isnull().sum() # how many missing records?
+dropped_toy_df = toy_df.dropna()
+filled_toy_df = toy_df.fillna(0) # replace with 0
+backfilled = toy_df.fillna(method='bfill') # next value that is not null
+fwfilled = toy_df.fillna(method='ffill') # next value that is not null
+meanfilled = toy_df.fillna(toy_df['numbers'].mean())
+interpolated = toy_df.interpolate()
+```
