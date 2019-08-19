@@ -13,6 +13,8 @@ Start date: Aug 11th 2019
         - [Distance from the mean](#distance-from-the-mean)
         - [Distance from fitted line](#distance-from-fitted-line)
 - [Preparing Data for Analysis](#preparing-data-for-analysis)
+    - [Missing values](#missing-values)
+    - [Removing data](#removing-data)
 
 <!-- /TOC -->
 
@@ -60,6 +62,8 @@ Outliers: points that lie more than *3 standard deviations (sqrt(variance))* fro
 ![outliers](addons/outliers.png)
 
 # Preparing Data for Analysis
+
+## Missing values
 ```python
 import pandas as pd
 import numpy as np
@@ -73,4 +77,10 @@ backfilled = toy_df.fillna(method='bfill') # next value that is not null
 fwfilled = toy_df.fillna(method='ffill') # next value that is not null
 meanfilled = toy_df.fillna(toy_df['numbers'].mean())
 interpolated = toy_df.interpolate()
+```
+
+## Removing data
+```python
+numeric_data = data.drop([columns], axis=1)
+categorical = data[columns]
 ```
