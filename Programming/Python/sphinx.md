@@ -1,5 +1,16 @@
 # Generating documentation with Sphinx
 
+<!-- TOC -->
+
+- [Generating documentation with Sphinx](#generating-documentation-with-sphinx)
+    - [Flow](#flow)
+    - [reStructured Text](#restructured-text)
+    - [API Doc](#api-doc)
+    - [Alternate way](#alternate-way)
+- [Linking to Pyton constructs](#linking-to-pyton-constructs)
+
+<!-- /TOC -->
+
 ```bash
 $ pip install sphinx
 
