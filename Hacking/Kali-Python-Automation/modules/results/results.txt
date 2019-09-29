@@ -1,0 +1,6 @@
+Executing list_files
+automation_sandbox.py
+-----------------------------
+Executing current_directory
+/m4ul/Documents/git/mynotes/Hacking/Kali-Python-Automation/modules
+-----------------------------
