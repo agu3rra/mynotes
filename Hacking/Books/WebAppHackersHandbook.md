@@ -123,3 +123,24 @@ Nonstandard parameter formats; application specific. Examples:
 	- /dir/foo.bar/file
 	- /dir/foo=bar/file
 	- /dir/file?param=foo:bar
+
+# Chapter 6 Attacking Authentication
+
+## Bad passwords
+1. Discover rules for weak passwords. During a registration process, for example or by changing your own.
+2. Client-side controls are not exactly bad since they protect most users. A crafted attacker being able to circumvent it is not itself a vulnerability (assign himself a weak pass).
+
+## Brute Force
+1. Test if there are mechanisms that prevent brute forcing.
+1. Check for the existence of a `failed logins=1` type cookie. Manipulate it if necessary.
+1. Monitor how bad login attempt messages look like (multiple of them). Is there a lockout policy?
+1. After account lockout, try submitting the valid password. If the behavior is different than the incorrect pw, brute force may continue for guessing the valid pass.
+1. If you detected password rules in place, curate your brute force lists (use a script to clean it).
+1. If targeting multiple accounts, do breadth-first. Benefits:
+  * Shared passwords between accounts are found sooner.
+  * Time delay between login attempts may hinder blocking mechanisms to brute force.
+
+**About subtle differences:**: some responses are only different in the UI. Try comparing HTTP responses in BURP Comparer. Sometimes, the difference lies in the response times. A valid user account takes longer or lesser time to respond.
+
+1. Sometimes login credentials are not exposed in the original request (HTTP POST), but the applications does redirects (302) to another component and it in turn uses them in URL query params.
+1. Check if there are any credentials stored in cookies.
